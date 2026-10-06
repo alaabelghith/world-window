@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World Window — a screen that behaves like a window</title>
+  <meta name="description" content="Head-tracked off-axis projection in the browser: the screen becomes a window onto a 3D scene. Three.js + MediaPipe.">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; background: #000; overflow: hidden; font-family: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif; color: #fff; }
+    canvas { display: block; width: 100vw; height: 100vh; }
+    .ui { position: fixed; z-index: 10; transition: opacity .6s ease; }
+    body.idle .ui { opacity: 0; }
+    body.noui .ui { display: none !important; }
+    #brand { left: 22px; top: 18px; font-size: 12px; letter-spacing: .32em; text-transform: uppercase; opacity: .85; text-shadow: 0 1px 8px rgba(0,0,0,.6); }
+    #brand b { font-weight: 500; } #brand span { font-weight: 300; opacity: .7; }
+    #hint { left: 22px; bottom: 20px; font-size: 13px; opacity: .8; max-width: 46ch; line-height: 1.5; text-shadow: 0 1px 8px rgba(0,0,0,.7); }
+    #controls { right: 18px; bottom: 16px; display: flex; gap: 8px; align-items: center; }
+    #controls button, #controls select {
+      background: rgba(10,10,14,.55); color: #fff; border: 1px solid rgba(255,255,255,.22); border-radius: 4px;
+      padding: 7px 13px; font: inherit; font-size: 12px; letter-spacing: .04em; cursor: pointer; backdrop-filter: blur(6px);
+    }
+    #controls button:hover, #controls select:hover { background: rgba(40,40,52,.7); }
+    #controls button.on { background: #7C3AED; border-color: #7C3AED; }
+    #status { left: 50%; top: 18px; transform: translateX(-50%); font-size: 12px; letter-spacing: .08em; background: rgba(10,10,14,.6); padding: 6px 12px; border-radius: 4px; opacity: 0; pointer-events: none; }
+    #noFace { left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; opacity: 0; pointer-events: none; text-shadow: 0 1px 8px rgba(0,0,0,.8); }
+  </style>
+</head>
+<body>
+  <div id="brand" class="ui"><b>World Window</b> <span>· Anything Visual</span></div>
+  <div id="status" class="ui"></div>
+  <div id="noFace" class="ui">Move into frame</div>
+  <div id="hint" class="ui">Move the mouse to look around, scroll to lean in. Turn on the webcam and the view follows your head instead.</div>
+  <div id="controls" class="ui">
+    <select id="sceneSel" title="Scene">
+      <option value="sidi">Sidi Bou Said, dusk</option>
+      <option value="glb">Beach (GLB)</option>
+    </select>
+    <select id="camSel" title="Camera" style="display:none"></select>
+    <select id="camOrient" title="How the camera is mounted">
+      <option value="landscape">Webcam</option>
+      <option value="portrait">Phone, upright</option>
+    </select>
+    <button id="modeBtn">Use webcam</button>
+    <button id="fsBtn">Fullscreen</button>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.163.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.163.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

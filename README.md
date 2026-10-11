@@ -62,3 +62,5 @@ Not finished:
 ---
 Built with AI coding assistance; concept and direction by Alaa Belghith, working as Anything Visual: [portfolio](https://alaabelghith.github.io).
 Three.js is MIT licensed; MediaPipe is Apache 2.0.
+
+Licence: MIT, see [LICENSE](LICENSE). Reuse it, credit Alaa Belghith.
